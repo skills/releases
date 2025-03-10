@@ -1,4 +1,4 @@
-name: Monthly Changelog Reminder
+name: Monthly Changelog PR
 
 on:
   schedule:
