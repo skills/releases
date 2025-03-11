@@ -150,7 +150,6 @@ jobs:
       - run: cat changelog/${{ steps.date.outputs.YEAR }}-${{ steps.date.outputs.MONTH }}.md
 
       - name: Create Pull Request
-        if: false
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
