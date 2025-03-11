@@ -40,10 +40,14 @@ jobs:
             pastDate.setDate(pastDate.getDate() - daysLookback);
             const dateFilter = pastDate.toISOString().split('T')[0];
 
+            console.log(`Fetching all repositories in ${org} with topic ${topic} created since ${dateFilter}...`);
+
             const { data: repos } = await github.rest.search.repos({
               q: `org:${org} topic:${topic} created:>=${dateFilter} sort:created-desc`,
               per_page: 100
             });
+
+            console.log(`Found ${repos.items.length} exercise repositories`);
 
             const formattedRepos = repos.items.map(repo => ({
               name: repo.name,
@@ -53,25 +57,6 @@ jobs:
             }));
 
             return formattedRepos;
-
-      - name: Build changelog
-        id: build-changelog
-        uses: skills/action-text-variables@v1
-        with:
-          template-file: ${{ env.CHANGELOG_TEMPLATE_FILE }}
-          template-vars: |
-            {
-              "new_exercises": ${{ steps.list-new-exercises.outputs.result }},
-              "platform_enhancements": []
-            }
-
-  track-template-usage:
-    name: Track Template Usage
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Track template repository usage
         uses: actions/github-script@v6
         id: track-templates
@@ -94,19 +79,17 @@ jobs:
               per_page: 100
             });
 
-            console.log(`Found ${repos.items.length} template repositories`);
-            console.log(`First repo stringified: ${JSON.stringify(repos.items[0])}`);
+            console.log(`Found ${repos.items.length} exercise repositories`);
 
             // Track usage for each template repo
             const templateUsage = [];
 
             for (const repo of repos.items) {
-              // Check how many repositories were created from this template in the last 30 days
+              // Check how many repositories were created with names containing this repo name in the last 30 days
               try {
-
-                // TODO: This does not work -> template is not a valid search qualifier
+                // Search for repositories that include this repo name in their name
                 const { data: search } = await github.rest.search.repos({
-                  q: `is:public template:${org}/${repo.name} created:>=${dateFilter}`,
+                  q: `${repo.name} in:name created:>=${dateFilter}`,
                   per_page: 1
                 });
                 templateUsage.push({
@@ -116,7 +99,7 @@ jobs:
                   description: repo.description || ''
                 });
 
-                console.log(`${repo.name}: ${search.total_count} repositories created from template since ${dateFilter}`);
+                console.log(`${repo.name}: ${search.total_count} repositories with similar name created since ${dateFilter}`);
               } catch (error) {
                 console.log(`Error getting data for ${repo.name}: ${error.message}`);
               }
@@ -129,10 +112,22 @@ jobs:
             console.log(JSON.stringify(templateUsage, null, 2));
 
             return templateUsage;
+      - name: Build changelog
+        id: build-changelog
+        uses: skills/action-text-variables@v1
+        with:
+          template-file: ${{ env.CHANGELOG_TEMPLATE_FILE }}
+          template-vars: |
+            {
+              "new_exercises": ${{ steps.list-new-exercises.outputs.result }},
+              "statistics": ${{ steps.track-templates.outputs.result }},
+              "platform_enhancements": []
+            }
+
 
   create-changelog-pr:
     name: Create Changelog Reminder Issue
-    needs: [generate-changelog, track-template-usage]
+    needs: generate-changelog
     runs-on: ubuntu-latest
 
     steps:
@@ -153,11 +148,6 @@ jobs:
           echo "$CHANGELOG_TEXT" > changelog/${{ steps.date.outputs.YEAR }}-${{ steps.date.outputs.MONTH }}.md
 
       - run: cat changelog/${{ steps.date.outputs.YEAR }}-${{ steps.date.outputs.MONTH }}.md
-      - name: echo template usage
-        if: false
-        env:
-          TEMPLATE_USAGE: ${{ needs.track-template-usage.outputs.result }}
-        run: echo $TEMPLATE_USAGE
 
       - name: Create Pull Request
         if: false
@@ -174,5 +164,8 @@ jobs:
             chriswblake
             arilivigni
           draft: true
+          labels: |
+            monthly-changelog
           add-paths: |
             changelog/*.md
+
