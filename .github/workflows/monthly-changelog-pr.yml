@@ -75,7 +75,7 @@ jobs:
 
             // Get all repos with the skills-course topic
             const { data: repos } = await github.rest.search.repos({
-              q: `org:${org} topic:${topic} sort:created-desc`,
+              q: `org:${org} topic:${topic}`,
               per_page: 100
             });
 
