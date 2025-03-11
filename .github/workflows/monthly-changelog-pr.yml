@@ -2,14 +2,14 @@ name: Monthly Changelog PR
 
 on:
   schedule:
-    # Run on the 1st day of each month at 9:00 AM UTC
-    - cron: "0 9 1 * *"
+    # Run on the 28th day of each month at 9:00 AM UTC
+    - cron: "0 9 28 * *"
   workflow_dispatch:
 
 env:
   PR_BODY_TEMPLATE_FILE: ".github/templates/changelog-reminder-pr.md"
   CHANGELOG_TEMPLATE_FILE: ".github/templates/changelog-template.md"
-  NEW_EXERCISE_LOOKBACK_DAYS: 30
+  NEW_EXERCISE_LOOKBACK_DAYS: 28
   SKILLS_EXERCISE_REPO_TOPIC: "skills-course"
 
 permissions:
@@ -124,7 +124,6 @@ jobs:
               "platform_enhancements": []
             }
 
-
   create-changelog-pr:
     name: Create Changelog Reminder Issue
     needs: generate-changelog
@@ -139,15 +138,16 @@ jobs:
         run: |
           echo "YEAR=$(date +%Y)" >> $GITHUB_OUTPUT
           echo "MONTH=$(date +%B)" >> $GITHUB_OUTPUT
+          echo "MONTH_NUM=$(date +%m)" >> $GITHUB_OUTPUT
 
       - name: Create changelog file
         env:
           CHANGELOG_TEXT: ${{ needs.generate-changelog.outputs.CHANGELOG_TEXT }}
         run: |
           mkdir -p changelog
-          echo "$CHANGELOG_TEXT" > changelog/${{ steps.date.outputs.YEAR }}-${{ steps.date.outputs.MONTH }}.md
+          echo "$CHANGELOG_TEXT" > changelog/${{ steps.date.outputs.YEAR }}-${{ steps.date.outputs.MONTH_NUM }}.md
 
-      - run: cat changelog/${{ steps.date.outputs.YEAR }}-${{ steps.date.outputs.MONTH }}.md
+      - run: cat changelog/${{ steps.date.outputs.YEAR }}-${{ steps.date.outputs.MONTH_NUM }}.md
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
@@ -167,4 +167,3 @@ jobs:
             monthly-changelog
           add-paths: |
             changelog/*.md
-
