@@ -35,6 +35,10 @@ In this exercise, learners will customize GitHub Copilot to support the staff of
 
 - The [Code with GitHub Copilot](https://github.com/skills/copilot-codespaces-vscode) exercise has been deprecated. A message has been added forwarding to [Getting Started with GitHub Copilot](https://github.com/skills/getting-started-with-github-copilot).
 
+#### Migration
+
+- [Introduction to GitHub](https://github.com/skills/introduction-to-github) has been migrated from readme-based to issue-based
+
 ## Platform Enhancements
 
 ### Skills Exercise Toolkit (preview)
