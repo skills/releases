@@ -55,3 +55,16 @@ In this first preview version, we combine some existing resources together, incl
 
 > Note: Existing exercies have not been modified to use this toolkit yet.
 
+### Skills Exercise Development Codespace (preview)
+
+The [Skills Exercise Development Codespace](https://github.com/skills/skills-manager) (currently known as "Skills Manager") is a preconfigured multi-workspace VS Code environment designed to easier authoring and updating of Skills exercises.
+The vision is to provide consistent runtime environments, linting settings, test tools, and access to the Skills Toolkit to accelerate exercise development
+
+In this first preview version, it provides:
+
+- Option to run as a codespae or local development container.
+- Configuration settings to run grading workflows locally.
+- Configuration settings for markdown linting so all exercises follow the same formatting.
+- Clones useful Actions.
+- Draft documentation for recommended practices.
+
