@@ -4,43 +4,36 @@ Welcome to the March 2025 release notes for GitHub Skills.
 
 <!-- Table of contents -->
 
+## Exercises
 
-#### [build-applications-w-copilot-agent-mode](https:&#x2F;&#x2F;github.com&#x2F;skills&#x2F;build-applications-w-copilot-agent-mode)
+#### 🆕 [Getting Started with GitHub Copilot](https://github.com/skills/getting-started-with-github-copilot)
 
-**Topics:** `copilot` `skills-course` 
+> Learn, build, debug, and ship faster than ever with your favorite AI pair programmer.
 
-GitHub Copilot: The agent awakens - Building applications with GitHub Copilot Agent Mode
+In this exercises, learners will onboard to Mergington High School's web application for managing extra curricular activities. They'll use GitHub Copilot to learn about the application, debug a reported problem, fix the problem, and add new functionality. Technical topics include:
 
-<!-- TODO: Add screenshots or GIFs here -->
+- Copilot Inline Suggestions
+- Copilot Chat
+- Copilot Edits
+- Copilot in the CLI
+- Copilot Commit Messages
+- Copilot Pull Request Summaries
+- Copilot Review
 
----
-#### [modernizing-legacy-apps-w-copilot](https:&#x2F;&#x2F;github.com&#x2F;skills&#x2F;modernizing-legacy-apps-w-copilot)
+#### 🆕 [Your First Extension for GitHub Copilot](https://github.com/skills/your-first-extension-for-github-copilot)
 
-**Topics:** `copilot` `skills-course` 
+> Teach GitHub Copilot about your industry, lingo, and company processes.
 
-Modernizing legacy applications with the help of GitHub Copilot
+In this exercise, learners will customize GitHub Copilot to support the staff of Mergington High School. They'll tailor a job description to make it friendlier for non-developers and provide the school's info and procedures, allowing the staff communicate more naturally. Technical topics include:
 
-<!-- TODO: Add screenshots or GIFs here -->
+- GitHUb Copilot Extensions
+- Copilot in the Web Browser
+- Copilot Chat
+- GitHub Apps
 
----
-#### [your-first-extension-for-github-copilot](https:&#x2F;&#x2F;github.com&#x2F;skills&#x2F;your-first-extension-for-github-copilot)
+#### Deprecations
 
-**Topics:** `copilot` `skills-course` 
-
-Customize GitHub Copilot to your personal or company needs in less than an hour.
-
-<!-- TODO: Add screenshots or GIFs here -->
-
----
-#### [getting-started-with-github-copilot](https:&#x2F;&#x2F;github.com&#x2F;skills&#x2F;getting-started-with-github-copilot)
-
-**Topics:** `skills-course` 
-
-Get started using GitHub Copilot in less than an hour.
-
-<!-- TODO: Add screenshots or GIFs here -->
-
----
+- The [Code with GitHub Copilot](https://github.com/skills/copilot-codespaces-vscode) exercise has been deprecated. A message has been added forwarding to [Getting Started with GitHub Copilot](https://github.com/skills/getting-started-with-github-copilot).
 
 ## 🚀 Platform Enhancements
 
