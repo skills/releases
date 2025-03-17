@@ -1,6 +1,9 @@
-# What's changed
+# March 2025
 
-## 📚 New Exercises
+Welcome to the March 2025 release notes for GitHub Skills.
+
+<!-- Table of contents -->
+
 
 #### [build-applications-w-copilot-agent-mode](https:&#x2F;&#x2F;github.com&#x2F;skills&#x2F;build-applications-w-copilot-agent-mode)
 
