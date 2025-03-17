@@ -35,8 +35,19 @@ In this exercise, learners will customize GitHub Copilot to support the staff of
 
 - The [Code with GitHub Copilot](https://github.com/skills/copilot-codespaces-vscode) exercise has been deprecated. A message has been added forwarding to [Getting Started with GitHub Copilot](https://github.com/skills/getting-started-with-github-copilot).
 
-## 🚀 Platform Enhancements
+## Platform Enhancements
 
-<!-- TODO: Add platform enhancements details here -->
+### Skills Exercise Toolkit (preview)
 
+The [Skills Exercise Toolkit](https://github.com/skills/exercise-toolkit) is a vision to build a collection of commonly used components.
+Our hope is templatize the underlying functional parts and provide space for more flexibility and personality in the exercises.
+
+In this first preview version, we combine some existing resources together, including:
+
+- **Find Exercise Workflow** - A reusable workflow that finds the issue created for hosting the exercise learning.
+- **Start Exercise Workflow** - A reusable workflow that deactivates the "Copy Exercise" button, activates the "Start Exercise" button, and creates a new issue for hosting the learning steps.
+- **Finish Exercise Workflow** - A reusable workflow that closes the issue and updates the main readme with a congratulations message.
+- **Response Templates** - A collection of markdown files with mustache style templating. These can be used to provide consistently style messages during step feedback.
+
+> Note: Existing exercies have not been modified to use this toolkit yet.
 
