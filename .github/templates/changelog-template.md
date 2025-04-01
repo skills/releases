@@ -28,14 +28,10 @@
 ---
 {{/platform_enhancements}}
 
-
 ## 📊 Statistics
-
-
 
 | Exercise | Exercises started |
 |---------|---------------------|
 {{#statistics}}
 | **[{{ name }}]({{ url }})** | {{ usage_count }} |
 {{/statistics}}
-
