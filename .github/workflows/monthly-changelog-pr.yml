@@ -57,61 +57,7 @@ jobs:
             }));
 
             return formattedRepos;
-      - name: Track template repository usage
-        uses: actions/github-script@v6
-        id: track-templates
-        with:
-          script: |
-            const org = 'skills';
-            const topic = process.env.SKILLS_EXERCISE_REPO_TOPIC;
-            const daysLookback = parseInt(process.env.NEW_EXERCISE_LOOKBACK_DAYS);
 
-            // Calculate date based on configurable lookback period
-            const pastDate = new Date();
-            pastDate.setDate(pastDate.getDate() - daysLookback);
-            const dateFilter = pastDate.toISOString().split('T')[0];
-
-            console.log(`Fetching all repositories in ${org} with topic ${topic}...`);
-
-            // Get all repos with the skills-course topic
-            const { data: repos } = await github.rest.search.repos({
-              q: `org:${org} topic:${topic}`,
-              per_page: 100
-            });
-
-            console.log(`Found ${repos.items.length} exercise repositories`);
-
-            // Track usage for each template repo
-            const templateUsage = [];
-
-            for (const repo of repos.items) {
-              // Check how many repositories were created with names containing this repo name in the last 30 days
-              try {
-                // Search for repositories that include this repo name in their name
-                const { data: search } = await github.rest.search.repos({
-                  q: `${repo.name} in:name created:>=${dateFilter}`,
-                  per_page: 1
-                });
-                templateUsage.push({
-                  name: repo.name,
-                  url: repo.html_url,
-                  usage_count: search.total_count,
-                  description: repo.description || ''
-                });
-
-                console.log(`${repo.name}: ${search.total_count} repositories with similar name created since ${dateFilter}`);
-              } catch (error) {
-                console.log(`Error getting data for ${repo.name}: ${error.message}`);
-              }
-            }
-
-            // Sort by usage count (highest first)
-            templateUsage.sort((a, b) => b.usage_count - a.usage_count);
-
-            console.log('Template usage statistics:');
-            console.log(JSON.stringify(templateUsage, null, 2));
-
-            return templateUsage;
       - name: Build changelog
         id: build-changelog
         uses: skills/action-text-variables@v1
@@ -120,7 +66,6 @@ jobs:
           template-vars: |
             {
               "new_exercises": ${{ steps.list-new-exercises.outputs.result }},
-              "statistics": ${{ steps.track-templates.outputs.result }},
               "platform_enhancements": []
             }
 
