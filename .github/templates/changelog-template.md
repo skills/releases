@@ -1,22 +1,30 @@
-# What's changed
+# {{ month }} {{ year}}
 
-## 📚 New Exercises
+## Exercises
+
+### ✍️ New Exercises
 
 {{#new_exercises}}
 
-#### [{{ name }}]({{ url }})
+#### 🆕 [{{ name }}]({{ url }})
 
-**Topics:** {{#topics}}`{{.}}` {{/topics}}
-
-{{ description }}
-
-<!-- TODO: Add screenshots or GIFs here -->
+> {{ description }}
 
 ---
 
 {{/new_exercises}}
 
-## 🚀 Platform Enhancements
+### 💫 Updated Exercises
+
+{{#updated_exercises}}
+
+#### [{{ name }}]({{ url }}) [[📝 changes]({{ url }}/commits/main)]
+
+> {{ description }}
+
+{{/updated_exercises}}
+
+## 🧱 Platform
 
 <!-- TODO: Add platform enhancements details here -->
 
