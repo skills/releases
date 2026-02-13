@@ -6,7 +6,7 @@
 
 ## About
 
-This repository contains release notes for [GitHub Skills](https://skills.github.com/)!
+This repository contains release notes for [GitHub Skills](https://learn.github.com/skills)!
 
 For detailed information about what we've built, please check our [changelog directory](./changelog).
 
